@@ -21,17 +21,17 @@ Redmine::Plugin.register :redmine_knowledgebase do
     :summary_limit => 5,
     :disable_article_summaries => false
     }, :partial => 'settings/knowledgebase_settings'
-  project_module :knowledgebase do
-    permission :view_articles, {
-      :knowledgebase => :index,
-      :articles      => [:show, :tagged],
-      :categories    => [:index, :show]
-    }
-    permission :create_articles, {
-      :knowledgebase => :index,
-      :articles => [:show, :tagged, :new, :create, :preview],
-      :categories => [:index, :show]
-    }
+    project_module :knowledgebase do
+      permission :view_articles, {
+        :knowledgebase => :index,
+        :articles      => [:show, :tagged],
+        :categories    => [:index, :show]
+      }
+      permission :create_articles, {
+        :knowledgebase => :index,
+        :articles => [:show, :tagged, :new, :create, :preview],
+        :categories => [:index, :show]
+      }
     # ...
   end
 end
