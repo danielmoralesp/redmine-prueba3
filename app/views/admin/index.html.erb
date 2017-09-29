@@ -1,3 +1,28 @@
+<% content_for :header_tags do %>
+  <%= bootstrap_load_base %>
+  <%= bootstrap_load_module(:switch) %>
+  <%= bootstrap_load_module(:tag_it) %>
+<% end %>
+
+<p>
+  <label>This is a switch button</label>
+  <%= bootstrap_switch_tag do %>
+    <%= hidden_field_tag "extra[enable]", "false" %>
+    <%= check_box_tag "extra[enable]" %>
+  <% end %>
+</p>
+
+<p>
+  <label>This is a TagIt list</label>
+</p>
+
+<%= tag_it_list 'plugin_emails_list',
+                { name: 'plugin[emails_list][]' },
+                { placeholder: '+ add email' } do %>
+  <li>john@doe.com</li>
+  <li>jane@doe.com</li>
+<% end %>
+
 <h2><%=l(:label_administration)%></h2>
 
 <div id="admin-index">
@@ -6,3 +31,10 @@
 </div>
 
 <% html_title(l(:label_administration)) -%>
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    setBootstrapSwitch();
+    setTagIt();
+  });
+<% end %>

@@ -110,6 +110,21 @@ ActiveRecord::Schema.define(version: 20160529063352) do
 
   add_index "changesets_issues", ["changeset_id", "issue_id"], name: "changesets_issues_ids", unique: true, using: :btree
 
+  create_table "charts", force: :cascade do |t|
+    t.string  "name",                  limit: 255
+    t.integer "project_id",            limit: 4
+    t.integer "tracker_id",            limit: 4
+    t.string  "chart_type",            limit: 255
+    t.string  "group_by_field",        limit: 255
+    t.integer "group_by_custom_field", limit: 4
+    t.integer "user_id",               limit: 4
+    t.boolean "is_public",                         default: false
+    t.integer "range_integer",         limit: 4,   default: 30
+    t.string  "range_type",            limit: 255, default: "days"
+    t.string  "time",                  limit: 255, default: ""
+    t.string  "issue_status",          limit: 255, default: "o"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "commented_type", limit: 30,    default: "", null: false
     t.integer  "commented_id",   limit: 4,     default: 0,  null: false
