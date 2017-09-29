@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529063352) do
+ActiveRecord::Schema.define(version: 20170120140500) do
+
+  create_table "api_log_for_plugins", force: :cascade do |t|
+    t.text     "plugin_code", limit: 65535,                 null: false
+    t.integer  "error_code",  limit: 4
+    t.text     "description", limit: 65535
+    t.text     "controller",  limit: 65535
+    t.text     "action",      limit: 65535
+    t.text     "params",      limit: 65535
+    t.integer  "user_id",     limit: 4
+    t.boolean  "served",                    default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "container_id",   limit: 4
@@ -163,6 +176,7 @@ ActiveRecord::Schema.define(version: 20160529063352) do
     t.boolean "multiple",                      default: false
     t.text    "format_store",    limit: 65535
     t.text    "description",     limit: 65535
+    t.boolean "ajaxable",                      default: false
   end
 
   add_index "custom_fields", ["id", "type"], name: "index_custom_fields_on_id_and_type", using: :btree
@@ -564,10 +578,11 @@ ActiveRecord::Schema.define(version: 20160529063352) do
   end
 
   create_table "user_preferences", force: :cascade do |t|
-    t.integer "user_id",   limit: 4,     default: 0,    null: false
-    t.text    "others",    limit: 65535
-    t.boolean "hide_mail",               default: true
-    t.string  "time_zone", limit: 255
+    t.integer "user_id",              limit: 4,     default: 0,    null: false
+    t.text    "others",               limit: 65535
+    t.boolean "hide_mail",                          default: true
+    t.string  "time_zone",            limit: 255
+    t.integer "favourite_project_id", limit: 4
   end
 
   add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id", using: :btree
