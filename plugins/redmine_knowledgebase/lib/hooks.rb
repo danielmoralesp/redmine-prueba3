@@ -37,3 +37,17 @@ module Knowledgebase
     end
   end
 end
+
+module RedmineKnowledgebase
+   class Hooks < Redmine::Hook::ViewListener
+     def model_project_copy_before_save(context = {})
+       source = context[:source_project]
+       destination = context[:destination_project]
+         if source.module_enabled?(:redmine_knowledgebase)
+           # TODO: clone all categories
+           # TODO: clone all articles
+           # TODO: ensure cloned articles refer to cloned categories
+         end
+       end
+     end 
+   end
