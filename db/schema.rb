@@ -79,6 +79,11 @@ ActiveRecord::Schema.define(version: 20170120140500) do
   add_index "boards", ["last_message_id"], name: "index_boards_on_last_message_id", using: :btree
   add_index "boards", ["project_id"], name: "boards_project_id", using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string "title",       limit: 255
+    t.text   "description", limit: 65535
+  end
+
   create_table "changes", force: :cascade do |t|
     t.integer "changeset_id",  limit: 4,                  null: false
     t.string  "action",        limit: 1,     default: "", null: false
@@ -439,6 +444,12 @@ ActiveRecord::Schema.define(version: 20170120140500) do
     t.integer "timestamp",  limit: 4,   null: false
     t.string  "server_url", limit: 255
     t.string  "salt",       limit: 255, null: false
+  end
+
+  create_table "polls", force: :cascade do |t|
+    t.string  "question", limit: 255
+    t.integer "yes",      limit: 4
+    t.integer "no",       limit: 4
   end
 
   create_table "projects", force: :cascade do |t|
