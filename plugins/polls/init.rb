@@ -6,6 +6,8 @@ Redmine::Plugin.register :polls do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
+  require_dependency 'polls_hook_listener'
+
   project_module :polls do
     permission :view_polls, :polls => :index
     permission :vote_polls, :polls => :vote
@@ -18,4 +20,6 @@ Redmine::Plugin.register :polls do
   delete_menu_item :project_menu, :overview
   delete_menu_item :project_menu, :activity
   delete_menu_item :project_menu, :news
+
+  settings :default => {'empty' => true}, :partial => 'settings/poll_settings'
 end
