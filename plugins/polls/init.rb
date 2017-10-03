@@ -15,11 +15,5 @@ Redmine::Plugin.register :polls do
 
   menu :project_menu, :polls, { :controller => 'polls', :action => 'index' }, :caption => 'Polls', :after => :activity, :param => :project_id
 
-  delete_menu_item :top_menu, :my_page
-  delete_menu_item :top_menu, :help
-  delete_menu_item :project_menu, :overview
-  delete_menu_item :project_menu, :activity
-  delete_menu_item :project_menu, :news
-
   settings :default => {'empty' => true}, :partial => 'settings/poll_settings'
 end
